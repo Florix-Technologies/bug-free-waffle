@@ -1,3 +1,3 @@
-export default function WebinarsPage() {
-  return <div>Coming Soon</div>;
-}
+import Webinars from '@/pages/Webinars';
+
+export default Webinars;

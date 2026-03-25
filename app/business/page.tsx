@@ -1,3 +1,3 @@
-export default function BusinessPage() {
-  return <div>Coming Soon</div>;
-}
+import Business from '@/pages/Business';
+
+export default Business;

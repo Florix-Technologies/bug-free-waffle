@@ -1,3 +1,3 @@
-export default function ContactPage() {
-  return <div>Coming Soon</div>;
-}
+import Contact from '@/pages/Contact';
+
+export default Contact;

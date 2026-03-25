@@ -108,7 +108,7 @@ const Pixel = ({ pixel, scrollYProgress }: PixelProps) => {
   );
 };
 
-export const HeroPixelReveal = () => {
+export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,

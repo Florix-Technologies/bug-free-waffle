@@ -1,3 +1,3 @@
-export default function AboutPage() {
-  return <div>Coming Soon</div>;
-}
+import About from '@/pages/About';
+
+export default About;

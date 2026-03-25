@@ -47,7 +47,7 @@ const testimonials = [
   },
 ];
 
-export const TestimonialsSlideshow = () => {
+export const Testimonials = () => {
   // Duplicate testimonials for seamless infinite scroll
   const duplicatedTestimonials = [...testimonials, ...testimonials];
 
