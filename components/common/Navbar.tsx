@@ -19,10 +19,10 @@ export function Navbar() {
               Home
             </Link>
             <Link
-              href="/about"
+              href="/courses"
               className="text-gray-300 hover:text-white transition-colors"
             >
-              About
+              Courses
             </Link>
             <Link
               href="/webinars"
@@ -31,16 +31,22 @@ export function Navbar() {
               Webinars
             </Link>
             <Link
-              href="/courses"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              Courses
-            </Link>
-            <Link
               href="/business"
               className="text-gray-300 hover:text-white transition-colors"
             >
               Business
+            </Link>
+            <Link
+              href="/about"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className="text-gray-300 hover:text-white transition-colors"
+            >
+              Contact
             </Link>
           </div>
         </div>
