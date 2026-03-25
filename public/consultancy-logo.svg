@@ -1,0 +1,33 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Large S shape with candlestick chart in the middle -->
+  <path d="M140 60 C165 60 175 75 175 90 C175 105 165 115 145 120 L145 125 C165 130 175 140 175 155 C175 170 165 185 140 185 L90 185 C85 185 75 180 70 170"
+        stroke="#16a34a"
+        stroke-width="28"
+        stroke-linecap="round"
+        fill="none"/>
+
+  <path d="M60 140 C35 140 25 125 25 110 C25 95 35 85 55 80 L55 75 C35 70 25 60 25 45 C25 30 35 15 60 15 L110 15 C115 15 125 20 130 30"
+        stroke="#16a34a"
+        stroke-width="28"
+        stroke-linecap="round"
+        fill="none"/>
+
+  <!-- Candlestick chart elements in the center -->
+  <!-- Bullish candle 1 -->
+  <line x1="85" y1="95" x2="85" y2="80" stroke="#16a34a" stroke-width="2"/>
+  <rect x="80" y="85" width="10" height="15" fill="#16a34a"/>
+  <line x1="85" y1="100" x2="85" y2="110" stroke="#16a34a" stroke-width="2"/>
+
+  <!-- Bearish candle 2 -->
+  <line x1="100" y1="75" x2="100" y2="65" stroke="#16a34a" stroke-width="2"/>
+  <rect x="95" y="75" width="10" height="20" fill="#16a34a"/>
+  <line x1="100" y1="95" x2="100" y2="105" stroke="#16a34a" stroke-width="2"/>
+
+  <!-- Bullish candle 3 -->
+  <line x1="115" y1="90" x2="115" y2="70" stroke="#16a34a" stroke-width="2"/>
+  <rect x="110" y="80" width="10" height="20" fill="#16a34a"/>
+  <line x1="115" y1="100" x2="115" y2="115" stroke="#16a34a" stroke-width="2"/>
+
+  <!-- Flag element (representing business/consultancy) -->
+  <path d="M120 75 L135 70 L135 85 L120 80 Z" fill="#16a34a" opacity="0.8"/>
+</svg>
