@@ -1,132 +1,142 @@
 'use client';
 
 import { Hero } from '@/components/Hero';
-import { StickyBackground } from '@/components/StickyBackground';
-import { DataHotspots } from '@/components/DataHotspots';
-import { ProcessAccordion } from '@/components/ProcessAccordion';
-import { DataCounters } from '@/components/DataCounters';
-import { Testimonials } from '@/components/Testimonials';
-import { SmoothScroll } from '@/components/SmoothScroll';
-import { LiquidNavbar } from '@/components/LiquidNavbar';
-import { LiquidGlassStretch } from '@/components/LiquidGlassStretch';
 import { Footer } from '@/components/Footer';
 import { motion } from 'framer-motion';
 
 export default function Home() {
   return (
-    <SmoothScroll>
-      <LiquidNavbar />
-      <main className="relative bg-black">
-        {/* Hero Section with Pixel Reveal */}
-        <Hero />
+    <main className="relative min-h-screen bg-black">
+      {/* Hero Section with Transparent Liquid Glass Pixels */}
+      <Hero />
 
-        {/* Liquid Glass Stretch Effect */}
-        <LiquidGlassStretch />
+      {/* Features Section */}
+      <section className="relative py-20 px-4 bg-gradient-to-b from-black via-gray-900 to-black">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold text-white text-center mb-16"
+          >
+            Why Choose Us
+          </motion.h2>
 
-        {/* Sticky Background with Floating Cards */}
-        <StickyBackground />
-
-        {/* Data Hotspots Section */}
-        <DataHotspots />
-
-        {/* Process Accordion Section */}
-        <ProcessAccordion />
-
-        {/* Data Counters Section */}
-        <DataCounters />
-
-        {/* Testimonials Slideshow */}
-        <Testimonials />
-
-        {/* Footer CTA Section */}
-        <section className="relative min-h-screen bg-gradient-to-b from-black to-gray-900 flex items-center justify-center py-20">
-          <div className="container mx-auto px-4">
-            <motion.div
-              className="text-center max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
-                Ready to Transform Your Data?
-              </h2>
-              <p className="text-xl text-gray-400 mb-12 leading-relaxed">
-                Join thousands of organizations leveraging cutting-edge analytics
-                to drive unprecedented growth and efficiency.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <motion.button
-                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-full text-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Start Free Trial
-                </motion.button>
-
-                <motion.button
-                  className="px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-full text-lg hover:bg-white/10 transition-all duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Schedule Demo
-                </motion.button>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 mt-20">
-                {[
-                  { value: '500+', label: 'Enterprise Clients' },
-                  { value: '99.9%', label: 'Uptime Guarantee' },
-                  { value: '24/7', label: 'Expert Support' },
-                ].map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    className="glass-card p-6"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="text-3xl md:text-4xl font-bold text-white mb-2">
-                      {stat.value}
-                    </div>
-                    <div className="text-gray-400">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Expert Guidance",
+                description: "Learn from CA professionals with 15+ years of trading experience",
+                icon: "📊"
+              },
+              {
+                title: "Proven Methods",
+                description: "Time-tested strategies backed by accounting principles",
+                icon: "✅"
+              },
+              {
+                title: "Personal Support",
+                description: "One-on-one mentoring to accelerate your learning",
+                icon: "🎯"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{ y: -10 }}
+                className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 shadow-xl"
+                style={{
+                  boxShadow: `
+                    inset 0 0 40px rgba(255, 255, 255, 0.03),
+                    0 10px 30px rgba(0, 0, 0, 0.2)
+                  `,
+                }}
+              >
+                <div className="text-5xl mb-4">{feature.icon}</div>
+                <h3 className="text-2xl font-bold text-white mb-3">{feature.title}</h3>
+                <p className="text-gray-400">{feature.description}</p>
+              </motion.div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* Animated background elements */}
+      {/* Stats Section */}
+      <section className="relative py-20 px-4 bg-black">
+        <div className="max-w-7xl mx-auto">
           <motion.div
-            className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="backdrop-blur-xl bg-gradient-to-r from-white/5 to-white/10 border border-white/10 rounded-3xl p-12 md:p-16"
+            style={{
+              boxShadow: `
+                inset 0 0 60px rgba(255, 255, 255, 0.05),
+                0 20px 60px rgba(0, 0, 0, 0.3)
+              `,
             }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-            }}
-          />
-          <motion.div
-            className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.5, 0.3, 0.5],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-            }}
-          />
-        </section>
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {[
+                { value: "15+", label: "Years Experience" },
+                { value: "5000+", label: "Students Taught" },
+                { value: "95%", label: "Success Rate" }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-gray-400 text-lg">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Footer */}
-        <Footer />
-      </main>
-    </SmoothScroll>
+      {/* CTA Section */}
+      <section className="relative py-20 px-4 bg-gradient-to-t from-black via-gray-900 to-black">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-12 md:p-16 shadow-2xl"
+            style={{
+              boxShadow: `
+                inset 0 0 60px rgba(255, 255, 255, 0.05),
+                0 20px 60px rgba(0, 0, 0, 0.3)
+              `,
+            }}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Ready to Transform Your Trading?
+            </h2>
+            <p className="text-xl text-gray-300 mb-8">
+              Join our community and start your journey to financial freedom today.
+            </p>
+            <motion.button
+              className="px-10 py-5 backdrop-blur-xl bg-gradient-to-r from-blue-500/80 to-cyan-500/80 border border-white/20 text-white font-semibold rounded-full text-lg shadow-lg"
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.4)" }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Get Started Now
+            </motion.button>
+          </motion.div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
   );
 }

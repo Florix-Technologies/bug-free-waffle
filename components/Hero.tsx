@@ -3,27 +3,9 @@
 import { useRef, useMemo } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 
-// Green and complementary color palette
-const colorPalette = [
-  '#F0FFF4', // Very light mint
-  '#E6F9F0', // Light mint
-  '#C6F6D5', // Lighter green
-  '#9AE6B4', // Light green
-  '#68D391', // Medium light green
-  '#48BB78', // Fresh green
-  '#38A169', // Medium green
-  '#2F855A', // Dark green
-  '#276749', // Very dark green
-  '#22543D', // Deep green
-  '#1C4532', // Almost black green
-  '#14362A', // Darkest green
-];
-
 interface PixelProps {
   pixel: {
     id: string;
-    color: string;
-    colorIndex: number;
     row: number;
     col: number;
   };
@@ -31,79 +13,59 @@ interface PixelProps {
 }
 
 const Pixel = ({ pixel, scrollYProgress }: PixelProps) => {
-  const fadeStart = pixel.colorIndex * 0.05;
-  const fadeEnd = fadeStart + 0.25;
+  const randomDelay = useMemo(() => Math.random() * 0.3, []);
+  const fadeStart = randomDelay;
+  const fadeEnd = fadeStart + 0.4;
 
   const opacity = useTransform(scrollYProgress, [fadeStart, fadeEnd], [1, 0]);
-  const blur = useTransform(scrollYProgress, [fadeStart, fadeEnd], [6, 0]);
-  const scale = useTransform(scrollYProgress, [fadeStart, fadeStart + 0.1], [1, 1.03]);
 
   return (
     <motion.div
-      key={pixel.id}
-      className="relative w-full h-full backdrop-blur-2xl border border-white/30 overflow-hidden group cursor-pointer"
+      className="relative w-full h-full backdrop-blur-2xl border border-white/20 overflow-hidden group cursor-pointer"
       style={{
-        backgroundColor: 'rgba(255, 255, 255, 0.05)',
         opacity,
-        filter: `blur(${blur}px)`,
-        scale,
+        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
         boxShadow: `
-          inset 0 0 80px rgba(255, 255, 255, 0.2),
-          inset 0 0 40px rgba(255, 255, 255, 0.15),
-          0 0 12px rgba(255, 255, 255, 0.1),
-          inset -4px -4px 20px rgba(0, 0, 0, 0.1)
+          inset 0 0 80px rgba(255, 255, 255, 0.08),
+          inset 20px 20px 60px rgba(255, 255, 255, 0.05),
+          inset -20px -20px 60px rgba(0, 0, 0, 0.1),
+          0 0 20px rgba(255, 255, 255, 0.05)
         `,
       }}
       whileHover={{
-        scale: 1.08,
-        backgroundColor: 'rgba(255, 255, 255, 0.15)',
-        transition: { duration: 0.4, ease: "easeOut" }
-      }}
-      transition={{
-        scale: { duration: 0.8, ease: [0.33, 1, 0.68, 1] }
+        scale: 1.02,
+        backgroundColor: 'rgba(255, 255, 255, 0.08)',
+        transition: { duration: 0.3 }
       }}
     >
-      {/* Full liquid glass effect with multiple layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/15 to-transparent" />
+      {/* Top light reflection */}
+      <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/30 via-white/10 to-transparent" />
 
-      {/* Top shine for glass effect */}
-      <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white/30 via-white/10 to-transparent" />
-
-      {/* Bottom shadow for depth */}
-      <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/15 to-transparent" />
+      {/* Bottom shadow */}
+      <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/20 to-transparent" />
 
       {/* Left edge highlight */}
       <div className="absolute left-0 top-0 w-1/4 h-full bg-gradient-to-r from-white/20 to-transparent" />
 
-      {/* Animated shimmer effect on hover */}
+      {/* Right edge shadow */}
+      <div className="absolute right-0 top-0 w-1/4 h-full bg-gradient-to-l from-black/10 to-transparent" />
+
+      {/* Shimmer effect on hover */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
         initial={{ x: '-100%', opacity: 0 }}
         whileHover={{ x: '100%', opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeInOut" }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
       />
 
-      {/* Frosted texture overlay */}
-      <div className="absolute inset-0 opacity-30" style={{
-        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.2) 1px, transparent 0)`,
-        backgroundSize: '8px 8px',
-      }} />
-
-      {/* Logo container - business consultancy logo */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
-        <motion.div
-          className="w-16 h-16 flex items-center justify-center"
-          initial={{ scale: 0, rotate: -45 }}
-          whileHover={{ scale: 1.1, rotate: 0 }}
-          transition={{ duration: 0.5, ease: "backOut" }}
-        >
-          <img
-            src="/consultancy-logo.svg"
-            alt="Consultancy Logo"
-            className="w-full h-full object-contain drop-shadow-lg filter brightness-110"
-          />
-        </motion.div>
-      </div>
+      {/* Subtle texture */}
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.15) 1px, transparent 0)`,
+          backgroundSize: '12px 12px',
+        }}
+      />
     </motion.div>
   );
 };
@@ -115,14 +77,10 @@ export const Hero = () => {
     offset: ['start start', 'end start'],
   });
 
-  // Smoother transformations with 3D parallax
   const imageOpacity = useTransform(scrollYProgress, [0, 0.5, 0.8], [0, 0.5, 1]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.8], [1.3, 1]);
   const imageY = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const imageRotateX = useTransform(scrollYProgress, [0, 0.5, 1], [0, 5, 0]);
-  const imageRotateY = useTransform(scrollYProgress, [0, 0.5, 1], [0, -3, 0]);
 
-  // Generate pixel grid - Bigger pixels
+  // Generate pixel grid - 6 cols x 4 rows
   const pixels = useMemo(() => {
     const cols = 6;
     const rows = 4;
@@ -130,13 +88,8 @@ export const Hero = () => {
 
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
-        const colorIndex = Math.floor(Math.random() * colorPalette.length);
-        const color = colorPalette[colorIndex];
-
         pixelArray.push({
           id: `${row}-${col}`,
-          color,
-          colorIndex,
           row,
           col,
         });
@@ -149,18 +102,13 @@ export const Hero = () => {
   return (
     <div ref={containerRef} className="relative h-[400vh]">
       {/* Sticky container */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-black" style={{ perspective: "1200px" }}>
-        {/* Background image with 3D parallax */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-pink-900/20">
+        {/* Background image with parallax */}
         <motion.div
           className="absolute inset-0"
           style={{
-            scale: imageScale,
             opacity: imageOpacity,
             y: imageY,
-            rotateX: imageRotateX,
-            rotateY: imageRotateY,
-            transformStyle: "preserve-3d",
-            perspective: 1000,
           }}
         >
           <div
@@ -170,21 +118,18 @@ export const Hero = () => {
                 'url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop)',
             }}
           />
-          {/* Dark overlay for better contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60" />
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-purple-900/40 to-blue-900/60" />
         </motion.div>
 
-        {/* Smooth Pixel Grid with Liquid Glass Effect - Bigger pixels */}
-        <div className="absolute inset-0 grid grid-cols-6 grid-rows-4" style={{
-          gridTemplateColumns: 'repeat(6, 1fr)',
-          gridTemplateRows: 'repeat(4, 1fr)',
-        }}>
+        {/* Transparent Liquid Glass Pixel Grid */}
+        <div className="absolute inset-0 grid grid-cols-6 grid-rows-4">
           {pixels.map((pixel) => (
             <Pixel key={pixel.id} pixel={pixel} scrollYProgress={scrollYProgress} />
           ))}
         </div>
 
-        {/* Initial Hero text - fades out slowly */}
+        {/* Initial Hero text */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center z-10"
           style={{
@@ -198,7 +143,7 @@ export const Hero = () => {
           </div>
         </motion.div>
 
-        {/* New text that appears when background reveals - Much slower */}
+        {/* Reveal text */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center z-10"
           style={{
@@ -211,7 +156,6 @@ export const Hero = () => {
               style={{
                 y: useTransform(scrollYProgress, [0.4, 0.6], [80, 0]),
               }}
-              transition={{ ease: [0.43, 0.13, 0.23, 0.96] }}
             >
               You&apos;re not alone — and it&apos;s fixable
             </motion.h2>
@@ -220,7 +164,6 @@ export const Hero = () => {
               style={{
                 y: useTransform(scrollYProgress, [0.45, 0.65], [80, 0]),
               }}
-              transition={{ ease: [0.43, 0.13, 0.23, 0.96] }}
             >
               15 years of CA-backed trading education,
               <br />
